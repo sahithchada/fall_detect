@@ -17,8 +17,8 @@ from ActionsEstLoader import TSSTG
 
 #source = '../Data/test_video/test7.mp4'
 #source = '../Data/falldata/Home/Videos/video (2).avi'  # hard detect
-source = '/Users/sahithreddy/Desktop/fall_detect/Human-Falling-Detect-Tracks/videos/Fall_Videos/Falling-walker.MP4'
-#source = 2
+#source = '/Users/sahithreddy/Desktop/fall_detection_work/fall_detect/videos/Fall_Videos/Fall-walking stick.MP4'
+source = '0'
 
 
 def preproc(image):
@@ -50,11 +50,11 @@ if __name__ == '__main__':
                         help='Backbone model for SPPE FastPose model.')
     par.add_argument('--show_detected', default=False, action='store_true',
                         help='Show all bounding box from detection.')
-    par.add_argument('--show_skeleton', default=True, action='store_true',
+    par.add_argument('--show_skeleton', default=False, action='store_true',
                         help='Show skeleton pose.')
     par.add_argument('--save_out', type=str, default='',
                         help='Save display to video file.')
-    par.add_argument('--device', type=str, default='cpu',
+    par.add_argument('--device', type=str, default='cuda',
                         help='Device to run model on cpu or cuda.')
     args = par.parse_args()
 
@@ -150,26 +150,27 @@ if __name__ == '__main__':
                 pts = np.array(track.keypoints_list, dtype=np.float32)
                 out = action_model.predict(pts, frame.shape[:2])
                 action_name = action_model.class_names[out[0].argmax()]
-                action = '{}: {:.2f}%'.format(action_name, out[0].max() * 100)
+                # action = '{}: {:.2f}%'.format(action_name, out[0].max() * 100)
+                action = '{}'.format(action_name)
                 if action_name == 'Fall Down':
                     clr = (255, 0, 0)
-                elif action_name == 'Lying Down':
-                    clr = (255, 200, 0)
+                # elif action_name == 'Lying Down':
+                #     clr = (255, 200, 0)
 
             # VISUALIZE.
             if track.time_since_update == 0:
                 if args.show_skeleton:
                     frame = draw_single(frame, track.keypoints_list[-1])
                 frame = cv2.rectangle(frame, (bbox[0], bbox[1]), (bbox[2], bbox[3]), (0, 255, 0), 1)
-                frame = cv2.putText(frame, str(track_id), (center[0], center[1]), cv2.FONT_HERSHEY_COMPLEX,
-                                    0.4, (255, 0, 0), 2)
+                # frame = cv2.putText(frame, str(track_id), (center[0], center[1]), cv2.FONT_HERSHEY_COMPLEX,
+                #                     0.4, (255, 0, 0), 2)
                 frame = cv2.putText(frame, action, (bbox[0] + 5, bbox[1] + 15), cv2.FONT_HERSHEY_COMPLEX,
                                     0.4, clr, 1)
 
         # Show Frame.
         frame = cv2.resize(frame, (0, 0), fx=2., fy=2.)
-        frame = cv2.putText(frame, '%d, FPS: %f' % (f, 1.0 / (time.time() - fps_time)),
-                            (10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
+        # frame = cv2.putText(frame, '%d, FPS: %f' % (f, 1.0 / (time.time() - fps_time)),
+        #                     (10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
         frame = frame[:, :, ::-1]
         fps_time = time.time()
 
