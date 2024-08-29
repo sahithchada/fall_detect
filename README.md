@@ -1,6 +1,6 @@
 <h1> Fall Detection</h1>
 
-The model predicts the action of people in the scene for every 30 frames. Fall detection can be used to trigger other workflows which alert the staff using text message, noise signals, etc.
+This repository contains a model designed to predict human actions in video scenes, specifically focusing on detecting falls. The model analyzes video frames in segments of 30 frames and can be used to trigger alerts via text messages, sound signals, or other workflows when a fall is detected.
 
 ## Requirements
 - Python > 3.6
@@ -21,7 +21,7 @@ The pre-trained model can be found here- https://drive.google.com/drive/folders/
 ```
     python blur_face_and_detect.py ${video file or camera source}
 ```
-## To PAckage the Model
+## To Package the Model
 1. Install pyinstaller
 ```
     pip install pyinstaller
