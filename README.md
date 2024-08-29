@@ -1,13 +1,14 @@
 <h1> Fall Detection</h1>
 
-Using Tiny-YOLO oneclass to detect each person in the frame and use 
-[AlphaPose](https://github.com/MVIG-SJTU/AlphaPose) to get skeleton-pose and then use
-[ST-GCN](https://github.com/yysijie/st-gcn) model to predict action from every 30 frames 
-of each person tracks.
+The model predicts the action of people in the scene for every 30 frames. Fall detection can be used to trigger other workflows which alert the staff using text message, noise signals, etc.
 
+## Requirements
 - Python > 3.6
 - Pytorch > 1.3.1
 Instruction to install pytorch can be found here- https://pytorch.org/get-started/locally/
+
+## Pre-Trained Models
+The pre-trained model can be found here- https://drive.google.com/drive/folders/1g-SsldFl8_VOpoGvFXFHJoLz2B_Gjjsg?usp=drive_link
 
 ## Basic Use
 
@@ -20,7 +21,12 @@ Instruction to install pytorch can be found here- https://pytorch.org/get-starte
 ```
     python blur_face_and_detect.py ${video file or camera source}
 ```
-## Reference
-
-- AlphaPose : https://github.com/Amanbhandula/AlphaPose
-- ST-GCN : https://github.com/yysijie/st-gcn
+## To PAckage the Model
+1. Install pyinstaller
+```
+    pip install pyinstaller
+```
+2. run main.spec
+```
+    pyinstaller main.spec
+```
