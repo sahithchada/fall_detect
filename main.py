@@ -14,11 +14,12 @@ from fn import draw_single
 
 from Track.Tracker import Detection, Tracker
 from ActionsEstLoader import TSSTG
+from telegram_broadcast import telegram_bot
 
 #source = '../Data/test_video/test7.mp4'
 #source = '../Data/falldata/Home/Videos/video (2).avi'  # hard detect
-#source = '/Users/sahithreddy/Desktop/fall_detection_work/fall_detect/videos/Fall_Videos/Fall-walking stick.MP4'
-source = '0'
+source = '/Users/sahithreddy/Desktop/fall_detection_work/fall_detect/videos/Fall_Videos/Fall-walking stick.MP4'
+#source = '0'
 
 
 def preproc(image):
@@ -54,9 +55,13 @@ if __name__ == '__main__':
                         help='Show skeleton pose.')
     par.add_argument('--save_out', type=str, default='',
                         help='Save display to video file.')
-    par.add_argument('--device', type=str, default='cuda',
+    par.add_argument('--device', type=str, default='cpu',
                         help='Device to run model on cpu or cuda.')
     args = par.parse_args()
+
+    bot_token = "7565092395:AAGbanNPTeTo20lIH88yVdBw_wvpU9ynfcw"
+    channel_chat_id = "-1002389449704"  
+    alerting_bot=telegram_bot(bot_token,channel_chat_id)
 
     device = args.device
 
@@ -166,6 +171,9 @@ if __name__ == '__main__':
                 #                     0.4, (255, 0, 0), 2)
                 frame = cv2.putText(frame, action, (bbox[0] + 5, bbox[1] + 15), cv2.FONT_HERSHEY_COMPLEX,
                                     0.4, clr, 1)
+                if action== 'Fall Down':
+                    alerting_bot.send_message('Fall Detected')
+                    alerting_bot.send_image(frame)
 
         # Show Frame.
         frame = cv2.resize(frame, (0, 0), fx=2., fy=2.)
