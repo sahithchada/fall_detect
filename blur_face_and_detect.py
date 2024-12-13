@@ -19,7 +19,7 @@ from telegram_broadcast import telegram_bot
 #source = '../Data/test_video/test7.mp4'
 #source = '../Data/falldata/Home/Videos/video (2).avi'  # hard detect
 #source = '/Users/sahithreddy/Desktop/fall_detection_work/fall_detect/videos/Fall_Videos/Fall-walking stick.MP4'
-#source = '0'
+source = '0'
 
 
 def preproc(image):

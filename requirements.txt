@@ -1,6 +1,9 @@
 numpy
 torch
+torchvision
 opencv-python
 opencv-python-headless
 argparse
 pytelegrambotapi
+scipy
+matplotlib
