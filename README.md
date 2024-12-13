@@ -5,7 +5,7 @@ This repository contains code for fall detection, capable of running on both GPU
 ## Prerequisites
 
 - **GPU Execution**: Ensure your system has a CUDA-supported GPU and that CUDA drivers are properly installed. Refer- https://docs.nvidia.com/cuda/cuda-installation-guide-linux/
-- **CPU Execution**: No special hardware requirements are needed.
+- **CPU Execution**: No special hardware requirements.
 
 # Running Fall Detection From Source
 
@@ -20,13 +20,12 @@ Install all the requirements using-
    ```bash
    pip3 install -r requirements.txt
    ```
-## Downloading the model
+Downloading the model
    Download the weights from google drive link below and place it inside Models directory-
    ```bash
    https://drive.google.com/drive/folders/1rZit5YD-Cvx_lhvEKrE5iPIRsNzR6Lir?usp=sharing
    ```
-
-## Running Source Code
+Running Source Code
    ```bash
    python3 blur_face_and_detect.py
    ```
